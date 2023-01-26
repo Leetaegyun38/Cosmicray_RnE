@@ -1,0 +1,64 @@
+TBrowser b
+
+data -> Print()
+
+TFile *file = new TFile("file.root", "read");
+
+TFile *file = new TFile("file.root", "recreate");
+
+file.Close();
+
+void conversion()
+{
+	TFile *file = new TFile("file.root", "recreate");
+	TH1D *hist1 = new TH1D("histogram1", "frist histogram",10,0,10);
+	file -> Write();
+}
+
+void histo()
+{
+	TFile *file = new TFile("file.root", "read");
+	TH1D *hist = (TH1D*) file -> Get("histogram1");
+	hist -> Draw();
+}
+
+void create_data() 
+{ 
+    TFile *file = new TFile("random_data.root","recreate");
+    auto tree = new TTree("data","");
+    Double_t x;
+    tree -> Branch("x",&x);
+    for (auto i = 0; i < 2000; i++) {
+        x = gRandom -> Gaus(31,9.005);
+        tree -> Fill();
+    }
+    tree -> Write();
+    file -> Close();
+}
+
+void writeTree()
+{
+TFile *file = new TFile("file.root", "recreate");
+TTree *tree = new TTree("data", "tree title");
+
+ifstream in;
+in.open(Form("teeeeest.csv"),dir.Data());
+
+if (pStr == NULL) break;
+sscanf(
+Int_t pid;
+tree -> Branch("particleID", &pid);
+Double_t edep;
+tree -> Branch("edep", &edep);
+
+while(1){
+in >> pid >> edep;
+if (!in.good()) break;
+tree -> Fill();
+nlines++;
+}
+in.close();
+tree -> write();
+file -> close();
+}
+
